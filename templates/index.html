@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube_Transcript_Summarizer</title>
+</head>
+<body>
+    <div class="content">
+        <h1 style="text-align: center">Youtube Transcript Summarizer</h1>
+        <p>Note:For language use the language code</p>
+
+        <form style="text-align: center" action="/" method="POST">
+            <label for="youtube_url">YouTube URL:</label>
+            <input type="text" name="youtube_url" id="youtube_url" required>
+            <br><br>
+            <!-- Include a language input field -->
+            <label for="language">Language:</label>
+            <input type="text" name="language" id="language" required>
+            <br><br>
+            <input type="submit" value="Summarize">
+        </form>
+        
+        <!-- Display the summary and audio -->
+        {% if summary %}
+        <div style="text-align: center">
+            <h2>Summary:</h2>
+            <p>{{ summary }}</p>
+            <br>
+            
+             <audio controls>
+                <source src="{{ audio_url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+            <!-- Add a download link for the translated summary -->
+            <a href="{{ url_for('download_summary', translated_summary=summary) }}" download>Download Translated Summary</a>
+            
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
